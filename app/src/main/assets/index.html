@@ -17,11 +17,13 @@
         function javacalljs(){
              document.getElementById("content").innerHTML +=
                  "<br\>我是网页本身的数据， 无参";
+             return "Android 调用 JS 无参函数"
         }
         <!-- Android 调用 JS 有参函数 -->
         function javacalljswithargs(data){
              document.getElementById("content").innerHTML +=
                  ("<br\>"+data);
+             return "Android 调用 JS 有参函数"
         }
     </script>
 </head>

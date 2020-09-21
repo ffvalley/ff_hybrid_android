@@ -1,7 +1,6 @@
 package com.ffvalley.hybrid
 
 import android.annotation.SuppressLint
-import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.webkit.WebView
@@ -58,23 +57,23 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(v: View) {
         when (v.id) {
             R.id.btn01 -> {
-                sendTo("javascript:javacalljs()")
+                WebViewUtil.sendTo(mWebView, "javascript:javacalljs()", object : JsReceiveCallback {
+                    override fun onJsReceive(value: String?) {
+                        println(value)
+                    }
+                })
             }
             R.id.btn02 -> {
-                sendTo("javascript:javacalljswithargs('" + "我是Android传进来的数据， 有参" + "')")
+                WebViewUtil.sendTo(
+                    mWebView,
+                    "javascript:javacalljswithargs('" + "我是Android传进来的数据， 有参" + "')",
+                    object : JsReceiveCallback {
+                        override fun onJsReceive(value: String?) {
+                            println(value)
+                        }
+                    }
+                )
             }
         }
     }
-
-    private fun sendTo(jsCode: String) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            mWebView.evaluateJavascript(jsCode) {
-                //此处为 js 返回的结果
-                println(it)
-            }
-        } else {
-            mWebView.loadUrl(jsCode)
-        }
-    }
-
 }
