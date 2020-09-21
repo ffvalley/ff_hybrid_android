@@ -1,2 +1,2 @@
 include ':app'
-rootProject.name = "ff_hybrid_anroid"
+rootProject.name = "ff_hybrid_android"
